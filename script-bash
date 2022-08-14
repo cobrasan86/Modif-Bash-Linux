@@ -25,7 +25,7 @@ export myred="\[\033[01;31m\]"
 
 #####awal command_not_found_handle########
 command_not_found_handle () {
-    echo -e "\e[\033[01;31m $@:\e[\033[0;38;5;45m Perintah opo su?!\n";
+    echo -e "\e[\033[01;31m $@:\e[\033[0;38;5;45m Perintah opo?!\n";
 }
 #####akhir command_not_found_handle########
 
