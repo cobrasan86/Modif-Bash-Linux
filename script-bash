@@ -24,8 +24,18 @@ export myred="\[\033[01;31m\]"
 #####akhir tambahan warna########
 
 #####awal command_not_found_handle########
-command_not_found_handle () {
-    echo -e "\e[\033[01;31m $@:\e[\033[0;38;5;45m Perintah opo?!\n";
+# command_not_found_handle () {
+#    echo -e "\e[\033[01;31m $@:\e[\033[0;38;5;45m Perintah opo su?!\n";
+# }
+command_not_found_handle() {
+  if  [ -x /usr/lib/command-not-found ]; then
+  echo -e "\e[\033[01;31m$@:\e[\033[0;38;5;45m Perintah salah cuy!\e[\033[0;38;5;2m";
+     /usr/lib/command-not-found -- "$@" &> /home/$USER/.bash_command
+     cat /home/$USER/.bash_command | awk '{if(NR>1)print}'
+     return $?
+  else
+     return 127
+  fi
 }
 #####akhir command_not_found_handle########
 
@@ -141,6 +151,8 @@ alias dd='dd status=progress'
 alias _='sudo'
 alias python='python3'
 alias lh='history'
+alias mpvl='mpv --loop'
+alias playyt='mpv --no-video'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
